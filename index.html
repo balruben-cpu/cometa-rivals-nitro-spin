@@ -913,32 +913,6 @@
       { name: "Turbo Flash", clan: "miticos", img: "cars/turbo flash.png", role: "Rayo", stat: "4/2" }
     ];
 
-    // Official TCG Export Data Lists
-    const tcgExports = {
-      arena: [
-        "Arenas Movedizas", "Bóveda del Cometa", "Campamento Panther", "Caídas de Kamino",
-        "Cementerio de Juguetes", "Cimientos de Cristal", "Ciudadela Plateada", "La Arena Campeones",
-        "La Pista de Carreras", "Laboratorio del Rey", "Llanuras del Tirano", "Nido del Wyvern",
-        "Pozo de los Depredadores", "Red de la Viuda", "Ruinas de Draconia", "Santuario del Sol",
-        "Templo Milenario", "Torreón de Espectro", "Valle de Pruebas", "Volcán Sangriento"
-      ],
-      cc: [
-        "Avispon", "Azteca", "Cometin", "Diamante", "Diamantin", "Draky", "Espectro", "Fenix_",
-        "Jumbo Cobra", "King Cobra", "Orion", "Panther", "Rex", "Silver", "Spider", "Tigre",
-        "Turbo Cobra", "Turbo Dragon", "Turbo Flash", "Turbo King"
-      ],
-      ck: [
-        "Avispon", "Azteca", "Cometin", "Diamante", "Diamantin", "Draky", "Espectro", "Fenix_",
-        "Jumbo Cobra", "King Cobra", "Orion", "Panther", "Rex", "Silver", "Spider", "Tigre",
-        "Turbo Cobra", "Turbo Dragon", "Turbo Flash", "Turbo King"
-      ],
-      trompo: [
-        "Avispón", "Azteca", "Cometín", "Diamante", "Diamantín", "Draky", "Espectro", "Fénix",
-        "Jumbo Cobra", "King Cobra", "Orión", "Panther", "Rex", "Silver", "Spider", "Tigre",
-        "Turbo Cobra_", "Turbo Dragón", "Turbo Flash", "Turbo King"
-      ]
-    };
-
     function renderRoster(filter = 'all') {
       const container = document.getElementById('roster-container');
       container.innerHTML = '';
@@ -950,7 +924,7 @@
         card.className = 'tcg-card-item';
         card.onclick = () => openModal(c.img);
         card.innerHTML = `
-          <img src="${c.img}" alt="${c.name}" class="tcg-card-img" onerror="this.src='assets/azteca_card_milenarios_mockup_1773452793855.png'">
+          <img src="${c.img}" alt="${c.name}" class="tcg-card-img" onerror="this.src='cars/azteca.png'">
           <div class="tcg-card-title">${c.name}</div>
           <div class="char-clan clan-${c.clan}">${c.clan.toUpperCase()}</div>
         `;
@@ -962,27 +936,6 @@
       document.querySelectorAll('#slide-4 .filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       renderRoster(clan);
-    }
-
-    function switchTcgCategory(cat, btn) {
-      document.querySelectorAll('#slide-5 .filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const container = document.getElementById('tcg-album-container');
-      container.innerHTML = '';
-
-      const items = tcgExports[cat] || [];
-      items.forEach(name => {
-        const imgPath = `assets/${cat}_${name}.png`;
-        const card = document.createElement('div');
-        card.className = 'tcg-card-item';
-        card.onclick = () => openModal(imgPath);
-        card.innerHTML = `
-          <img src="${imgPath}" alt="${name}" class="tcg-card-img" onerror="this.src='assets/azteca_card_milenarios_mockup_1773452793855.png'">
-          <div class="tcg-card-title">${name.replace('_', '')}</div>
-        `;
-        container.appendChild(card);
-      });
     }
 
     function openModal(imgSrc) {
