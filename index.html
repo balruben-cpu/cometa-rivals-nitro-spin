@@ -471,6 +471,76 @@
       border-radius: 16px;
       box-shadow: 0 0 50px rgba(0, 240, 255, 0.5);
     }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 768px) {
+      header {
+        padding: 0.75rem 1rem;
+      }
+      .brand-title {
+        font-size: 1rem;
+      }
+      .header-badge {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+      }
+      .slide {
+        padding: 1.25rem 1rem;
+      }
+      .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        text-align: center;
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .hero-tagline {
+        font-size: 1.1rem;
+        justify-content: center;
+      }
+      .hero-desc {
+        font-size: 0.95rem;
+      }
+      .hero-card-preview {
+        width: 100%;
+        max-width: 280px;
+      }
+      .pill-list {
+        justify-content: center;
+      }
+      .slide-title {
+        font-size: 1.5rem;
+      }
+      .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .filter-bar {
+        flex-wrap: wrap;
+      }
+      .filter-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+      }
+      .tcg-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        max-height: 380px;
+      }
+      .tcg-card-img {
+        height: 120px;
+      }
+      .custom-table th, .custom-table td {
+        padding: 0.6rem 0.75rem;
+        font-size: 0.8rem;
+      }
+      footer {
+        padding: 0.75rem 1rem;
+      }
+      .slide-indicators {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1025,6 +1095,29 @@
         closeModal();
       }
     });
+
+    // Touch Swipe Support for Mobile Devices
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const slidesWrapper = document.querySelector('.slides-wrapper');
+
+    slidesWrapper.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    slidesWrapper.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const swipeThreshold = 40;
+      if (touchEndX < touchStartX - swipeThreshold) {
+        changeSlide(1); // Swipe left -> Next slide
+      } else if (touchEndX > touchStartX + swipeThreshold) {
+        changeSlide(-1); // Swipe right -> Previous slide
+      }
+    }
 
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
