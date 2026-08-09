@@ -548,16 +548,48 @@
       --border-glass: rgba(0, 0, 0, 0.08);
       --text-main: #1d1d1f;
       --text-muted: #6e6e73;
-      --accent-cyan: #0071e3;
-      --accent-gold: #e3b341;
-      --accent-purple: #9d4edd;
-      --accent-red: #ff3b30;
+      --accent-cyan: #0066cc;  /* Deep Sharp Blue */
+      --accent-gold: #b37b00;  /* Dark High-Contrast Amber Gold */
+      --accent-purple: #8619b8;/* Deep Sharp Purple */
+      --accent-red: #d70015;   /* Deep Sharp Crimson */
     }
 
     [data-theme="light"] body {
       background-color: #f5f5f7;
-      background-image: radial-gradient(circle at 50% 10%, #ffffff 0%, #f5f5f7 70%);
+      background-image: radial-gradient(circle at 50% 10%, #ffffff 0%, #e8e8ed 70%);
       color: #1d1d1f;
+    }
+
+    [data-theme="light"] h1,
+    [data-theme="light"] h2,
+    [data-theme="light"] h3,
+    [data-theme="light"] h4,
+    [data-theme="light"] h5,
+    [data-theme="light"] strong,
+    [data-theme="light"] b,
+    [data-theme="light"] .card-title,
+    [data-theme="light"] .slide-title {
+      color: #1d1d1f;
+    }
+
+    [data-theme="light"] [style*="color: var(--accent-gold)"],
+    [data-theme="light"] [style*="color:var(--accent-gold)"] {
+      color: #b37b00 !important;
+    }
+
+    [data-theme="light"] [style*="color: var(--accent-cyan)"],
+    [data-theme="light"] [style*="color:var(--accent-cyan)"] {
+      color: #0066cc !important;
+    }
+
+    [data-theme="light"] [style*="color: var(--accent-red)"],
+    [data-theme="light"] [style*="color:var(--accent-red)"] {
+      color: #d70015 !important;
+    }
+
+    [data-theme="light"] [style*="color: var(--accent-purple)"],
+    [data-theme="light"] [style*="color:var(--accent-purple)"] {
+      color: #8619b8 !important;
     }
 
     [data-theme="light"] header {
@@ -995,49 +1027,49 @@
               <div class="teaser-selector-card active" onclick="playTeaserVideo('teaser/Animate_this_image (5).mp4', '⭐ Teaser Principal (Concept 5) • Carrera & Giros Overdrive en Batalla', this)">
                 <span style="font-size: 1.4rem;">⭐</span>
                 <div>
-                  <strong style="color: #fff; font-size: 0.9rem; display: block;">1. Teaser Principal (Concept 5)</strong>
+                  <strong style="color: var(--text-main); font-size: 0.9rem; display: block;">1. Teaser Principal (Concept 5)</strong>
                   <span style="font-size: 0.8rem; color: var(--text-muted);">Visualización preferida de gameplay principal & overdrive spin.</span>
                 </div>
               </div>
               <div class="teaser-selector-card" onclick="playTeaserVideo('teaser/make_a_short_teaser_triler_for.mp4', '🎬 Teaser Trailer • Presentación Cinematográfica del Proyecto', this)">
                 <span style="font-size: 1.4rem;">🎬</span>
                 <div>
-                  <strong style="color: #fff; font-size: 0.9rem; display: block;">2. Teaser Trailer Oficial</strong>
+                  <strong style="color: var(--text-main); font-size: 0.9rem; display: block;">2. Teaser Trailer Oficial</strong>
                   <span style="font-size: 0.8rem; color: var(--text-muted);">Trailer conceptual cinematográfico de Cometa Rivals.</span>
                 </div>
               </div>
               <div class="teaser-selector-card" onclick="playTeaserVideo('teaser/Animate_this_image (1).mp4', '💥 Concept 1 • Colisiones Físicas & Impacto Ricochet', this)">
                 <span style="font-size: 1.4rem;">💥</span>
                 <div>
-                  <strong style="color: #fff; font-size: 0.9rem; display: block;">3. Impacto Ricochet (Concept 1)</strong>
+                  <strong style="color: var(--text-main); font-size: 0.9rem; display: block;">3. Impacto Ricochet (Concept 1)</strong>
                   <span style="font-size: 0.8rem; color: var(--text-muted);">Transferencia de masa y choques entre tanques y karts.</span>
                 </div>
               </div>
               <div class="teaser-selector-card" onclick="playTeaserVideo('teaser/Animate_this_image (2).mp4', '🏎️ Concept 2 • Acción de Carreras en Asfalto & Nitro', this)">
                 <span style="font-size: 1.4rem;">🏎️</span>
                 <div>
-                  <strong style="color: #fff; font-size: 0.9rem; display: block;">4. Kart Action (Concept 2)</strong>
+                  <strong style="color: var(--text-main); font-size: 0.9rem; display: block;">4. Kart Action (Concept 2)</strong>
                   <span style="font-size: 0.8rem; color: var(--text-muted);">Adelantamientos y estelas de turbo en pistas cerradas.</span>
                 </div>
               </div>
               <div class="teaser-selector-card" onclick="playTeaserVideo('teaser/Animate_this_image (3).mp4', '⚡ Concept 3 • Boost Nitro Cosmic & Derrapes', this)">
                 <span style="font-size: 1.4rem;">⚡</span>
                 <div>
-                  <strong style="color: #fff; font-size: 0.9rem; display: block;">5. Turbo Overdrive (Concept 3)</strong>
+                  <strong style="color: var(--text-main); font-size: 0.9rem; display: block;">5. Turbo Overdrive (Concept 3)</strong>
                   <span style="font-size: 0.8rem; color: var(--text-muted);">Acumulación de inercia y aceleración hiper-cósmica.</span>
                 </div>
               </div>
               <div class="teaser-selector-card" onclick="playTeaserVideo('teaser/Animate_this_image (4).mp4', '🏟️ Concept 4 • Combate en Arenas de Clanes', this)">
                 <span style="font-size: 1.4rem;">🏟️</span>
                 <div>
-                  <strong style="color: #fff; font-size: 0.9rem; display: block;">6. Clash de Arenas (Concept 4)</strong>
+                  <strong style="color: var(--text-main); font-size: 0.9rem; display: block;">6. Clash de Arenas (Concept 4)</strong>
                   <span style="font-size: 0.8rem; color: var(--text-muted);">Combate directo en coliseos cerrados de 3 minutos.</span>
                 </div>
               </div>
               <div class="teaser-selector-card" onclick="playTeaserVideo('teaser/Animate_this_image.mp4', '🌀 Concept Base • Giro de Trompos en Batalla', this)">
                 <span style="font-size: 1.4rem;">🌀</span>
                 <div>
-                  <strong style="color: #fff; font-size: 0.9rem; display: block;">7. Spin Attack (Concept Base)</strong>
+                  <strong style="color: var(--text-main); font-size: 0.9rem; display: block;">7. Spin Attack (Concept Base)</strong>
                   <span style="font-size: 0.8rem; color: var(--text-muted);">Física de trompos girando a hiper-velocidad.</span>
                 </div>
               </div>
