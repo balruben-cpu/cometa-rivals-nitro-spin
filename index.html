@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cometa Rivals: Overdrive - Executive Pitch Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #090c15;
+      --bg-card: #121829;
+      --bg-glass: rgba(18, 24, 41, 0.75);
+      --border-glass: rgba(255, 255, 255, 0.12);
+      
+      --accent-cyan: #00f0ff;
+      --accent-gold: #ffb700;
+      --accent-purple: #9d4edd;
+      --accent-red: #ff2a6d;
+      
+      --clan-milenarios: #2ec4b6;
+      --clan-depredadores: #e71d36;
+      --clan-fugitivos: #ff9f1c;
+      --clan-miticos: #9d4edd;
+      
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    #bg-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .deck-container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2.5rem;
+      background: rgba(9, 12, 21, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-glass);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.2rem;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+    }
+
+    .brand-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #ffffff, var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-badge {
+      background: rgba(255, 183, 0, 0.15);
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .slides-wrapper {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 2.5rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(60px);
+      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    .slide-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .slide-subtitle {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .slide-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 3.8rem;
+      font-weight: 900;
+      line-height: 1.05;
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent-cyan) 70%, var(--accent-purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.5rem;
+      color: var(--accent-gold);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .pill {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-glass);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-card-preview {
+      width: 320px;
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0, 240, 255, 0.3);
+      border: 2px solid rgba(0, 240, 255, 0.4);
+      transform: rotate(-4deg) scale(1.05);
+      transition: transform 0.3s ease;
+    }
+
+    .hero-card-preview:hover {
+      transform: rotate(0deg) scale(1.1);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .glass-card {
+      background: var(--bg-glass);
+      border: 1px solid var(--border-glass);
+      border-radius: 16px;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 240, 255, 0.4);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .card-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .custom-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--bg-glass);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-glass);
+    }
+
+    .custom-table th, .custom-table td {
+      padding: 1rem 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .custom-table th {
+      background: rgba(255, 255, 255, 0.05);
+      font-weight: 700;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    .custom-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .highlight-row {
+      background: rgba(0, 240, 255, 0.08);
+      font-weight: 700;
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-glass);
+      color: var(--text-muted);
+      padding: 0.5rem 1.25rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--accent-cyan);
+      color: #000;
+      border-color: var(--accent-cyan);
+    }
+
+    .tcg-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.25rem;
+      max-height: 420px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+
+    .tcg-card-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      padding: 0.75rem;
+      text-align: center;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .tcg-card-item:hover {
+      transform: translateY(-5px) scale(1.03);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 10px 25px rgba(0, 240, 255, 0.3);
+    }
+
+    .tcg-card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    .tcg-card-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2.5rem;
+      background: rgba(9, 12, 21, 0.95);
+      border-top: 1px solid var(--border-glass);
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-glass);
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      background: var(--accent-cyan);
+      color: #000;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .slide-indicators {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .dot.active {
+      background: var(--accent-cyan);
+      width: 24px;
+      border-radius: 12px;
+    }
+
+    .counter {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Modal Zoom */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 16px;
+      box-shadow: 0 0 50px rgba(0, 240, 255, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="bg-canvas"></canvas>
+
+  <div class="deck-container">
+    <header>
+      <div class="brand">
+        <div class="brand-logo">☄️</div>
+        <div class="brand-title">COMETA RIVALS: OVERDRIVE</div>
+      </div>
+      <div class="header-badge">PITCH DECK PRESENTATION • 2026</div>
+    </header>
+
+    <div class="slides-wrapper">
+
+      <!-- SLIDE 1: Cover & Vision -->
+      <div class="slide active" id="slide-1">
+        <div class="hero-layout">
+          <div>
+            <div class="slide-subtitle">Executive Pitch • Nintendo Switch 2 & Mobile</div>
+            <h1 class="hero-title">COMETA RIVALS: OVERDRIVE</h1>
+            <div class="hero-tagline">
+              ⚡ <span>"Spin Fast. Hit Hard. Collect the Universe."</span>
+            </div>
+            <p class="hero-desc">
+              Un juego de carreras y combate arena de alta velocidad que fusiona el momentum de <strong>Sonic Forces Speed Battle</strong> y <strong>Disney Speedstorm</strong> con la física de colisión e impacto de trompos estilo <strong>Smash Karts</strong>.
+            </p>
+            <div class="pill-list">
+              <span class="pill">🎮 Nintendo Switch 2</span>
+              <span class="pill">📱 iOS / Android</span>
+              <span class="pill">👥 21 Campeones Únicos</span>
+              <span class="pill">🃏 Transmedia 80-Card Album</span>
+              <span class="pill">💰 Target Budget: $132k USD</span>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <img src="poster/poster.png" alt="Cometa Rivals Poster" class="hero-card-preview" style="width: 380px; max-height: 520px; object-fit: cover; border-radius: 20px; box-shadow: 0 0 35px rgba(0, 240, 255, 0.4); cursor: pointer;" onclick="openModal('poster/poster.png')">
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: Opportunity & Market Benchmark -->
+      <div class="slide" id="slide-2">
+        <div class="slide-header">
+          <div class="slide-subtitle">Oportunidad de Mercado</div>
+          <h2 class="slide-title">The Hybrid Sweet Spot: Carreras + Arena Combat</h2>
+        </div>
+        <div class="grid-2">
+          <div class="glass-card">
+            <div class="card-icon">🎯</div>
+            <h3 class="card-title">El Problema del Mercado</h3>
+            <p class="card-text">
+              • <strong>Carreras Tradicionales:</strong> Caída drástica de retención al Día 7 por repetición de pistas.<br><br>
+              • <strong>Vehicular Shooters (Rebel Riders):</strong> Controles 3D complejos e incómodos para pantallas táctiles móviles.
+            </p>
+          </div>
+          <div class="glass-card">
+            <div class="card-icon">🚀</div>
+            <h3 class="card-title">La Solución Cometa Rivals</h3>
+            <p class="card-text">
+              • <strong>Controles Sin Fricción:</strong> Avance automático en carriles + ataques por toque/swipe (probado por Sonic Forces: 100M+ descargas).<br><br>
+              • <strong>Impacto Físico Leíble:</strong> Colisiones de trompos con física de masa y rebote en arenas de 3 minutos.
+            </p>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem;">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Juego Referente</th>
+                <th>Plataforma</th>
+                <th>Fortaleza Clave</th>
+                <th>Lo que Cometa Rivals Adapta</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Disney Speedstorm</td>
+                <td>Switch / Mobile / PC</td>
+                <td>Clases de Héroes & Habilidades Insignia</td>
+                <td>20 Campeones con roles (Tanque, Brawler, Magia)</td>
+              </tr>
+              <tr>
+                <td>Sonic Forces: Speed Battle</td>
+                <td>Mobile (100M+ Downloads)</td>
+                <td>Controles por carril táctil de alta retención</td>
+                <td>Combate ágil sin fricción de manejo 3D complejo</td>
+              </tr>
+              <tr>
+                <td>Smash Karts / Beach Buggy 2</td>
+                <td>Web / Mobile / Console</td>
+                <td>Combate inmediato en arenas de 3 min</td>
+                <td>Arenas temáticas de los 4 Clanes</td>
+              </tr>
+              <tr class="highlight-row">
+                <td>☄️ COMETA RIVALS: OVERDRIVE</td>
+                <td>Switch 2 & Mobile Crossplay</td>
+                <td>Speed + Ricochet Physics + TCG Transmedia</td>
+                <td><strong>Fórmula Definitiva de Alta Retención</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: Core Gameplay & Mechanics -->
+      <div class="slide" id="slide-3">
+        <div class="slide-header">
+          <div class="slide-subtitle">Mecánicas de Juego</div>
+          <h2 class="slide-title">Física de Colisión & El Círculo Cometa</h2>
+        </div>
+        <div class="grid-3">
+          <div class="glass-card">
+            <div class="card-icon">🌀</div>
+            <h3 class="card-title">1. Overdrive Drift & Spin</h3>
+            <p class="card-text">
+              Los jugadores acumulan inercia ejecutando derrapes cósmicos. Al activar el <em>Overdrive</em>, el personaje gira como un trompo a hiper-velocidad rompiendo barreras.
+            </p>
+          </div>
+          <div class="glass-card">
+            <div class="card-icon">💥</div>
+            <h3 class="card-title">2. Colisiones Físicas (Ricochet)</h3>
+            <p class="card-text">
+              El impacto entre trompos transfiere inercia real. Los tanques pesados expulsan a los rivales ligeros contra los muros de la arena provocando KO instantáneo.
+            </p>
+          </div>
+          <div class="glass-card">
+            <div class="card-icon">⚔️</div>
+            <h3 class="card-title">3. Ventaja Elemental de Clanes</h3>
+            <p class="card-text">
+              Sistema "Piedra, Papel o Tijera" avanzado: Atacar a un clan débil otorga <strong>+1 de Daño y Empuje adicional</strong> durante la colisión.
+            </p>
+          </div>
+        </div>
+        <div style="margin-top: 1.25rem; background: var(--bg-glass); border: 1px solid var(--border-glass); border-radius: 12px; padding: 1rem; text-align: center;">
+          <h4 style="color: var(--accent-gold); margin-bottom: 0.4rem;">🌀 EL CÍRCULO COMETA (SISTEMA DE VENTAJAS)</h4>
+          <p style="font-size: 1rem; letter-spacing: 1px;">
+            🌳 <strong>Milenarios</strong> ➔ superan a ⛓️ <strong>Fugitivos</strong> ➔ superan a 🪓 <strong>Depredadores</strong> ➔ superan a 🐉 <strong>Míticos</strong> ➔ superan a 🌳 <strong>Milenarios</strong>
+          </p>
+        </div>
+
+        <div style="margin-top: 1rem;">
+          <h4 style="color: var(--accent-cyan); margin-bottom: 0.6rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">🏎️ ARQUETIPOS / CLASES DE VEHÍCULOS</h4>
+          <div class="grid-4">
+            <div class="glass-card" style="padding: 0.85rem; text-align: left;">
+              <h5 style="color: var(--accent-cyan); font-size: 0.95rem;">⚡ 1. Ligeros (Speedsters)</h5>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">F1 estilizado / Jets. Máxima velocidad y aceleración. Nitro 2x en estela.</p>
+            </div>
+            <div class="glass-card" style="padding: 0.85rem; text-align: left;">
+              <h5 style="color: var(--accent-gold); font-size: 0.95rem;">🏎️ 2. Equilibrados (Karts)</h5>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Kart clásico. Stats balanceados. Escudo automático tras recibir choque.</p>
+            </div>
+            <div class="glass-card" style="padding: 0.85rem; text-align: left;">
+              <h5 style="color: var(--accent-red); font-size: 0.95rem;">🛡️ 3. Pesados (Tanques)</h5>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Monster / Orugas. Masa masiva. Expulsan a rivales contra muros causando KO.</p>
+            </div>
+            <div class="glass-card" style="padding: 0.85rem; text-align: left;">
+              <h5 style="color: var(--accent-purple); font-size: 0.95rem;">⛓️ 4. Disruptores (Buggies)</h5>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Derrapes de 360°. Trampas de área 2x más grandes y roban Nitro.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: Champion Roster -->
+      <div class="slide" id="slide-4">
+        <div class="slide-header">
+          <div class="slide-subtitle">Roster de Personajes & Autos</div>
+          <h2 class="slide-title">21 Campeones con sus Vehículos de Batalla</h2>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="filterRoster('all', this)">Todos (21)</button>
+          <button class="filter-btn" onclick="filterRoster('milenarios', this)">🌳 Milenarios</button>
+          <button class="filter-btn" onclick="filterRoster('depredadores', this)">🪓 Depredadores</button>
+          <button class="filter-btn" onclick="filterRoster('fugitivos', this)">⛓️ Fugitivos</button>
+          <button class="filter-btn" onclick="filterRoster('miticos', this)">🐉 Míticos</button>
+        </div>
+        <div class="tcg-grid" id="roster-container">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- SLIDE 5: In-Game Sponsorship & Brand Reinforcement -->
+      <div class="slide" id="slide-5">
+        <div class="slide-header">
+          <div class="slide-subtitle">Fortalecimiento de Marca</div>
+          <h2 class="slide-title">El Motor de Patrocinio In-Game & Sinergia Retail</h2>
+        </div>
+        <div class="grid-2">
+          <div class="glass-card">
+            <h3 class="card-title" style="color: var(--accent-gold);">🏁 Showroom Continuo en Pistas & Vehículos</h3>
+            <p class="card-text">
+              • <strong>🌀 Trompos Pickups (Power-Ups 3D):</strong> Los bonuses flotantes en pista son <strong>modelos 3D de los trompos reales Cometa</strong> (otorgan vida, nitro, proyectiles y trampas), exhibiendo el catálogo de juguetes en cada partida.<br><br>
+              • <strong>Vallas & Pantallas Gigantes:</strong> Las pistas (<em>La Pista de Carreras, Ciudadela Plateada</em>) proyectan constantemente los <strong>lanzamientos de nuevos trompos físicos</strong> (<em>"¡NUEVO TROMPO KING COBRA DELUXE!"</em>).<br><br>
+              • <strong>Decals estilo Motorsport:</strong> Los vehículos y trajes llevan marcas de trompos Cometa como patrocinadores oficiales de carreras.
+            </p>
+          </div>
+          <div class="glass-card">
+            <h3 class="card-title" style="color: var(--accent-cyan);">🔄 Marketing Omnicanal & Ingresos B2B</h3>
+            <p class="card-text">
+              • <strong>Retail ➔ Game Sync:</strong> Cada lanzamiento de juguete real activa un <em>Sponsor Grand Prix</em> ingame, educando a millones de niños y disparando ventas en tiendas.<br><br>
+              • <strong>Patrocinios B2B Externos:</strong> Oportunidad de negociar espacio publicitario en pistas con marcas de bebidas, botanas y cadenas de juguetes para ingresos pasivos.
+            </p>
+          </div>
+        </div>
+        <div style="margin-top: 1.5rem; background: linear-gradient(135deg, rgba(255, 183, 0, 0.1), rgba(0, 240, 255, 0.1)); border: 1px solid var(--accent-gold); border-radius: 12px; padding: 1.2rem; display: flex; align-items: center; gap: 1.5rem;">
+          <img src="poster/poster (2).png" alt="Sponsorship Showcase Poster" style="width: 130px; border-radius: 10px; border: 1px solid var(--accent-cyan); box-shadow: 0 0 15px rgba(0, 240, 255, 0.3); cursor: pointer;" onclick="openModal('poster/poster (2).png')">
+          <div style="flex: 1;">
+            <h4 style="color: var(--accent-gold); margin-bottom: 0.4rem;">🚀 LA VENTAJA ÚNICA DEL GÉNERO KART/RACING</h4>
+            <p style="font-size: 1rem; color: #fff; line-height: 1.5;">
+              En un juego de carreras, la publicidad se siente <strong>100% natural e inmersiva</strong>. El juego se convierte en un catálogo virtual vivo en 3D que impulsa las ventas de juguetes físicos de la marca Cometa 24/7.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: Multiplatform & Nintendo Switch 2 -->
+      <div class="slide" id="slide-6">
+        <div class="slide-header">
+          <div class="slide-subtitle">Arquitectura Multiplataforma</div>
+          <h2 class="slide-title">Lanzamiento en Mobile & Nintendo Switch 2</h2>
+        </div>
+        <div class="grid-2">
+          <div class="glass-card">
+            <h3 class="card-title" style="color: var(--accent-gold);">🎮 Nintendo Switch 2 Appeal</h3>
+            <p class="card-text">
+              • <strong>Registro 100% Gratuito:</strong> Nintendo Developer Portal no cobra cuota de licencia anual ni costo por submit de juego.<br><br>
+              • <strong>Baja Barrera Dev Kit:</strong> Equipamiento oficial a costo accesible (~$450-$800 USD por unidad).<br><br>
+              • <strong>Soporte Gamepad Nivel Nativo:</strong> Mapeo intuitivo a Joy-Cons y soporte HD Rumble para sentir cada choque de trompos.
+            </p>
+          </div>
+          <div class="glass-card">
+            <h3 class="card-title" style="color: var(--accent-cyan);">📱 Mobile Performance & Netcode</h3>
+            <p class="card-text">
+              • <strong>Unity 2026 Engine:</strong> Optimizado para 60 FPS estables en dispositivos gama media.<br><br>
+              • <strong>Photon Fusion Netcode:</strong> Predicción client-side para sincronización física de impacto en tiempo real sin lag.<br><br>
+              • <strong>Cross-Play Nativo:</strong> Jugadores de iPhone, Android y Switch 2 compiten en las mismas salas de 3 minutos.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 7: Budget & AI Acceleration -->
+      <div class="slide" id="slide-7">
+        <div class="slide-header">
+          <div class="slide-subtitle">Presupuesto Eficiente</div>
+          <h2 class="slide-title">Producción Acelerada por IA (Target: $132,000 USD)</h2>
+        </div>
+        <div class="grid-2">
+          <div>
+            <p style="color: var(--accent-cyan); font-weight:600; margin-bottom: 0.6rem; font-size: 0.95rem;">
+              🎨 <strong>Ventaja de Producción:</strong> Los 20 personajes ya cuentan con sus modelos 3D y rigging 100% terminados, reduciendo drásticamente los costos e impulsando el sistema de animaciones expresivas dentro del auto.
+            </p>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">
+              En 2026, el uso de IA para mallas base 3D de vehículos, texturizado PBR y boilerplate en Unity reduce el presupuesto entre un <strong>40% y 50%</strong>.
+            </p>
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>Rubro</th>
+                  <th>Tradicional</th>
+                  <th>Acelerado (IA Target)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Ingeniería Core & Física</td>
+                  <td>$65,000</td>
+                  <td style="color: var(--accent-cyan); font-weight:700;">$45,000</td>
+                </tr>
+                <tr>
+                  <td>20 Campeones (Arte & Anim)</td>
+                  <td>$45,000</td>
+                  <td style="color: var(--accent-cyan); font-weight:700;">$20,000</td>
+                </tr>
+                <tr>
+                  <td>Arenas, UI & Shaders VFX</td>
+                  <td>$30,000</td>
+                  <td style="color: var(--accent-cyan); font-weight:700;">$18,000</td>
+                </tr>
+                <tr>
+                  <td>Netcode Multi-jugador</td>
+                  <td>$35,000</td>
+                  <td style="color: var(--accent-cyan); font-weight:700;">$25,000</td>
+                </tr>
+                <tr>
+                  <td>Nintendo Switch 2 QA</td>
+                  <td>$25,000</td>
+                  <td style="color: var(--accent-cyan); font-weight:700;">$15,000</td>
+                </tr>
+                <tr class="highlight-row">
+                  <td>TOTAL PROYECTADO</td>
+                  <td>$215,000</td>
+                  <td style="color: var(--accent-gold); font-size:1.1rem; font-weight:900;">$132,000 USD</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="glass-card" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: rgba(255, 183, 0, 0.05); border-color: var(--accent-gold);">
+            <div style="font-size: 3rem; margin-bottom: 0.5rem;">💡</div>
+            <h3 style="color: var(--accent-gold); font-size: 1.5rem; margin-bottom: 1rem;">La Ventaja del Pitch</h3>
+            <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.6;">
+              Al solicitar un rango de <strong>$120,000 – $150,000 USD</strong>, ofrecemos a los inversionistas o publishers un producto de calidad comercial AAA a menos de la mitad del presupuesto tradicional, garantizando un ROI significativamente más rápido.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 8: Business Model & Monetization -->
+      <div class="slide" id="slide-8">
+        <div class="slide-header">
+          <div class="slide-subtitle">Modelo de Negocio</div>
+          <h2 class="slide-title">Monetización & Vías de Ingresos</h2>
+        </div>
+        <div class="grid-4">
+          <div class="glass-card">
+            <div class="card-icon">🎟️</div>
+            <h4 class="card-title">Rival Pass</h4>
+            <p class="card-text">Pases de batalla de 6 semanas temáticos por Clan con recompensas cosméticas exclusivas.</p>
+          </div>
+          <div class="glass-card">
+            <div class="card-icon">✨</div>
+            <h4 class="card-title">Skin Shop</h4>
+            <p class="card-text">Aspectos dorados/holográficos para personajes, estelas de nitro y efectos de choque customizables.</p>
+          </div>
+          <div class="glass-card">
+            <div class="card-icon">🎴</div>
+            <h4 class="card-title">Sobres TCG</h4>
+            <p class="card-text">Venta de paquetes de cartas digitales y Polvo Cometa para crafteo de la colección.</p>
+          </div>
+          <div class="glass-card">
+            <div class="card-icon">🕹️</div>
+            <h4 class="card-title">Nintendo eShop</h4>
+            <p class="card-text">Lanzamiento Free-to-Play con compras in-app y bundles especiales de fundador.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 9: LiveOps & Retention -->
+      <div class="slide" id="slide-9">
+        <div class="slide-header">
+          <div class="slide-subtitle">Métricas & Retención</div>
+          <h2 class="slide-title">LiveOps Flywheel: El Ciclo de Hábito Diario</h2>
+        </div>
+        <div class="grid-3">
+          <div class="glass-card" style="border-top: 4px solid var(--accent-cyan);">
+            <div style="font-size: 2.2rem; font-weight: 900; color: var(--accent-cyan); margin-bottom: 0.3rem;">> 45%</div>
+            <h4 class="card-title">Día 1 Retention Goal</h4>
+            <p class="card-text">Partidas ultra-rápidas de 3 minutos e incentivo de recompensa por primer inicio de sesión.</p>
+          </div>
+          <div class="glass-card" style="border-top: 4px solid var(--accent-gold);">
+            <div style="font-size: 2.2rem; font-weight: 900; color: var(--accent-gold); margin-bottom: 0.3rem;">> 22%</div>
+            <h4 class="card-title">Día 7 Retention Goal</h4>
+            <p class="card-text">Sobres TCG diarios y mecánica de racha de 7 días para desbloquear cartas Raras.</p>
+          </div>
+          <div class="glass-card" style="border-top: 4px solid var(--accent-purple);">
+            <div style="font-size: 2.2rem; font-weight: 900; color: var(--accent-purple); margin-bottom: 0.3rem;">> 10%</div>
+            <h4 class="card-title">Día 30 Retention Goal</h4>
+            <p class="card-text">Torneos de Clanes de fin de semana y eventos de jefes de arena global.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 10: Roadmap & Call to Action -->
+      <div class="slide" id="slide-10">
+        <div class="slide-header">
+          <div class="slide-subtitle">Plan de Ejecución</div>
+          <h2 class="slide-title">Roadmap a 6 Meses & Siguiente Paso</h2>
+        </div>
+        <div class="grid-2">
+          <div class="glass-card" style="display: flex; gap: 1.5rem; align-items: center;">
+            <div style="flex: 1;">
+              <h3 class="card-title" style="color: var(--accent-cyan); margin-bottom: 0.75rem;">🗓️ Hitos de Desarrollo</h3>
+              <ul style="list-style: none; line-height: 1.8; font-size: 0.95rem;">
+                <li>✅ <strong>Mes 1-2:</strong> Vertical Slice (Física 1v1 y 4 Campeones).</li>
+                <li>✅ <strong>Mes 3-4:</strong> 21 Campeones, Álbum TCG y Netcode 6-players.</li>
+                <li>✅ <strong>Mes 5:</strong> Porting Nintendo Switch 2 & Lotcheck QA.</li>
+                <li>🚀 <strong>Mes 6:</strong> Soft Launch & Global Cross-play Release.</li>
+              </ul>
+            </div>
+            <img src="poster/poster (3).png" alt="Poster Finale" style="width: 140px; border-radius: 12px; border: 1px solid var(--accent-gold); box-shadow: 0 0 20px rgba(255, 183, 0, 0.3); cursor: pointer;" onclick="openModal('poster/poster (3).png')">
+          </div>
+          <div class="glass-card" style="background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(157, 78, 221, 0.15)); border-color: var(--accent-cyan); display: flex; flex-direction: column; justify-content: center; text-align: center;">
+            <h2 style="font-size: 2rem; color: #fff; margin-bottom: 1rem;">¿Listo para llevar Cometa Rivals a Switch 2 & Mobile?</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem;">
+              Solicitud de Inversión / Financiación: <strong>$132,000 USD</strong>
+            </p>
+            <div>
+              <button style="background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple)); border: none; color: #fff; padding: 1rem 2.5rem; font-size: 1.1rem; font-weight: 700; border-radius: 30px; cursor: pointer; box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);">
+                ¡Iniciar Desarrollo! 🚀
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer Controls -->
+    <footer>
+      <div class="counter" id="slide-counter">Slide 1 de 10</div>
+      <div class="slide-indicators" id="dots-container"></div>
+      <div class="nav-controls">
+        <button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)">◄ Anterior</button>
+        <button class="nav-btn" id="next-btn" onclick="changeSlide(1)">Siguiente ►</button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal for Zoom -->
+  <div class="modal" id="img-modal" onclick="closeModal()">
+    <img id="modal-target-img" src="" class="modal-img" alt="Zoom">
+  </div>
+
+  <script>
+    // Character & Car Data (21 Champions)
+    const champions = [
+      { name: "Avispón", clan: "depredadores", img: "cars/avispon.png", role: "Speedster", stat: "3/1" },
+      { name: "Azteca", clan: "milenarios", img: "cars/azteca.png", role: "Tanque", stat: "6/6" },
+      { name: "Cometín", clan: "milenarios", img: "cars/cometin.png", role: "Ligero", stat: "2/2" },
+      { name: "Diamante", clan: "fugitivos", img: "cars/diamante.png", role: "Resistente", stat: "1/7" },
+      { name: "Diamantín", clan: "milenarios", img: "cars/diamantin.png", role: "Soporte", stat: "1/2" },
+      { name: "Draky", clan: "fugitivos", img: "cars/draky.png", role: "Astuto", stat: "2/4" },
+      { name: "Espectro", clan: "miticos", img: "cars/espectro.png", role: "Sombra", stat: "4/3" },
+      { name: "Fénix", clan: "miticos", img: "cars/fenix.png", role: "Fuego", stat: "4/6" },
+      { name: "Jumbo Cobra", clan: "fugitivos", img: "cars/jumbo cobra.png", role: "Brawler", stat: "5/4" },
+      { name: "King Cobra", clan: "depredadores", img: "cars/king cobra.png", role: "Monarca", stat: "6/7" },
+      { name: "Turbo King", clan: "fugitivos", img: "cars/king turbo.png", role: "Líder", stat: "5/5" },
+      { name: "Orión", clan: "miticos", img: "cars/orion.png", role: "Estratega", stat: "2/5" },
+      { name: "Panther", clan: "depredadores", img: "cars/panther.png", role: "Cazadora", stat: "5/2" },
+      { name: "Prisma ✨", clan: "miticos", img: "cars/prisma.png", role: "Refractor", stat: "5/6" },
+      { name: "Rex", clan: "miticos", img: "cars/rex.png", role: "Fuerza Bruta", stat: "8/8" },
+      { name: "Silver", clan: "milenarios", img: "cars/silver.png", role: "Escudo", stat: "3/3" },
+      { name: "Spider", clan: "fugitivos", img: "cars/spider.png", role: "Red", stat: "1/4" },
+      { name: "Tigre", clan: "depredadores", img: "cars/tigre.png", role: "Feroz", stat: "6/4" },
+      { name: "Turbo Cobra", clan: "milenarios", img: "cars/turbo cobra.png", role: "Veloz", stat: "2/1" },
+      { name: "Turbo Dragón", clan: "depredadores", img: "cars/turbo dragon.png", role: "Dragón", stat: "7/5" },
+      { name: "Turbo Flash", clan: "miticos", img: "cars/turbo flash.png", role: "Rayo", stat: "4/2" }
+    ];
+
+    // Official TCG Export Data Lists
+    const tcgExports = {
+      arena: [
+        "Arenas Movedizas", "Bóveda del Cometa", "Campamento Panther", "Caídas de Kamino",
+        "Cementerio de Juguetes", "Cimientos de Cristal", "Ciudadela Plateada", "La Arena Campeones",
+        "La Pista de Carreras", "Laboratorio del Rey", "Llanuras del Tirano", "Nido del Wyvern",
+        "Pozo de los Depredadores", "Red de la Viuda", "Ruinas de Draconia", "Santuario del Sol",
+        "Templo Milenario", "Torreón de Espectro", "Valle de Pruebas", "Volcán Sangriento"
+      ],
+      cc: [
+        "Avispon", "Azteca", "Cometin", "Diamante", "Diamantin", "Draky", "Espectro", "Fenix_",
+        "Jumbo Cobra", "King Cobra", "Orion", "Panther", "Rex", "Silver", "Spider", "Tigre",
+        "Turbo Cobra", "Turbo Dragon", "Turbo Flash", "Turbo King"
+      ],
+      ck: [
+        "Avispon", "Azteca", "Cometin", "Diamante", "Diamantin", "Draky", "Espectro", "Fenix_",
+        "Jumbo Cobra", "King Cobra", "Orion", "Panther", "Rex", "Silver", "Spider", "Tigre",
+        "Turbo Cobra", "Turbo Dragon", "Turbo Flash", "Turbo King"
+      ],
+      trompo: [
+        "Avispón", "Azteca", "Cometín", "Diamante", "Diamantín", "Draky", "Espectro", "Fénix",
+        "Jumbo Cobra", "King Cobra", "Orión", "Panther", "Rex", "Silver", "Spider", "Tigre",
+        "Turbo Cobra_", "Turbo Dragón", "Turbo Flash", "Turbo King"
+      ]
+    };
+
+    function renderRoster(filter = 'all') {
+      const container = document.getElementById('roster-container');
+      container.innerHTML = '';
+
+      const filtered = filter === 'all' ? champions : champions.filter(c => c.clan === filter);
+
+      filtered.forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'tcg-card-item';
+        card.onclick = () => openModal(c.img);
+        card.innerHTML = `
+          <img src="${c.img}" alt="${c.name}" class="tcg-card-img" onerror="this.src='assets/azteca_card_milenarios_mockup_1773452793855.png'">
+          <div class="tcg-card-title">${c.name}</div>
+          <div class="char-clan clan-${c.clan}">${c.clan.toUpperCase()}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterRoster(clan, btn) {
+      document.querySelectorAll('#slide-4 .filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderRoster(clan);
+    }
+
+    function switchTcgCategory(cat, btn) {
+      document.querySelectorAll('#slide-5 .filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const container = document.getElementById('tcg-album-container');
+      container.innerHTML = '';
+
+      const items = tcgExports[cat] || [];
+      items.forEach(name => {
+        const imgPath = `assets/${cat}_${name}.png`;
+        const card = document.createElement('div');
+        card.className = 'tcg-card-item';
+        card.onclick = () => openModal(imgPath);
+        card.innerHTML = `
+          <img src="${imgPath}" alt="${name}" class="tcg-card-img" onerror="this.src='assets/azteca_card_milenarios_mockup_1773452793855.png'">
+          <div class="tcg-card-title">${name.replace('_', '')}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function openModal(imgSrc) {
+      const modal = document.getElementById('img-modal');
+      const targetImg = document.getElementById('modal-target-img');
+      targetImg.src = imgSrc;
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('img-modal').classList.remove('active');
+    }
+
+    // Slide Navigation Logic
+    let currentSlide = 1;
+    const totalSlides = 10;
+
+    function initDots() {
+      const dotsContainer = document.getElementById('dots-container');
+      dotsContainer.innerHTML = '';
+      for (let i = 1; i <= totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.className = `dot ${i === 1 ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function updateSlide() {
+      document.querySelectorAll('.slide').forEach((slide, idx) => {
+        if (idx + 1 === currentSlide) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      document.querySelectorAll('.dot').forEach((dot, idx) => {
+        dot.className = `dot ${idx + 1 === currentSlide ? 'active' : ''}`;
+      });
+
+      document.getElementById('slide-counter').textContent = `Slide ${currentSlide} de ${totalSlides}`;
+      document.getElementById('prev-btn').disabled = currentSlide === 1;
+      document.getElementById('next-btn').disabled = currentSlide === totalSlides;
+    }
+
+    function changeSlide(direction) {
+      if (currentSlide + direction >= 1 && currentSlide + direction <= totalSlides) {
+        currentSlide += direction;
+        updateSlide();
+      }
+    }
+
+    function goToSlide(slideNum) {
+      currentSlide = slideNum;
+      updateSlide();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') {
+        changeSlide(1);
+      } else if (e.key === 'ArrowLeft') {
+        changeSlide(-1);
+      } else if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function createParticles() {
+      particles = [];
+      for (let i = 0; i < 40; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 2 + 1,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          color: Math.random() > 0.5 ? '#00f0ff' : '#9d4edd'
+        });
+      }
+    }
+
+    function animateCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+      });
+      requestAnimationFrame(animateCanvas);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createParticles();
+    });
+
+    window.onload = () => {
+      renderRoster('all');
+      switchTcgCategory('arena', document.querySelector('#slide-5 .filter-btn'));
+      initDots();
+      updateSlide();
+      resizeCanvas();
+      createParticles();
+      animateCanvas();
+    };
+  </script>
+</body>
+</html>
